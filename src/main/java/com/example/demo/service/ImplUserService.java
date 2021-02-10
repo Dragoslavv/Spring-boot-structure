@@ -60,7 +60,7 @@ public class ImplUserService implements UserService {
         Users users = new Users();
 
         users.setFirstName(usersData.getFirstName());
-        users.setLastName(usersData.getFirstName());
+        users.setLastName(usersData.getLastName());
         users.setEmail(usersData.getEmail());
 
         return users;

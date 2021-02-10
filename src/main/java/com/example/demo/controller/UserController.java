@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.dto.UsersData;
 import com.example.demo.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,5 +20,10 @@ public class UserController {
     @GetMapping
     public List< UsersData > getUsers(){
         return userService.getAllUsers();
+    }
+
+    @GetMapping("/user/{id}")
+    public UsersData getUser(@PathVariable Long id){
+        return userService.getUserId(id);
     }
 }

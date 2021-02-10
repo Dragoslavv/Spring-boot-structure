@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface UserService {
 
-    public abstract UsersData saveUser(UsersData user);
-    public abstract boolean deleteUsers(Long userId);
-    public abstract List< UsersData > getAllUsers();
-    public abstract UsersData getUserId(Long userId);
+    UsersData saveUser(UsersData user);
+    boolean deleteUsers(final Long userId);
+    List< UsersData > getAllUsers();
+    UsersData getUserId(final Long userId);
 }
