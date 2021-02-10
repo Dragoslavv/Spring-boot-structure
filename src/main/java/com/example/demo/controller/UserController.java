@@ -1,15 +1,23 @@
 package com.example.demo.controller;
 
-import com.example.demo.dao.IUserDao;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.demo.dto.UsersData;
+import com.example.demo.service.UserService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
+import java.util.List;
+
 @RestController
+@RequestMapping("/users")
 public class UserController {
 
-    @Autowired
-    // The code here show the Rest Controller class file,
-    // here we @Autowired the UserDao interface and called the methods.
-    private IUserDao users;
+    @Resource(name = "userService")
+    private UserService userService;
 
+    @GetMapping
+    public List< UsersData > getUsers(){
+        return userService.getAllUsers();
+    }
 }
