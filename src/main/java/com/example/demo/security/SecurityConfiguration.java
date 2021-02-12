@@ -8,8 +8,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
-
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
@@ -17,10 +15,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         httpSecurity.csrf().disable()
                 .formLogin().disable()
                 .authorizeRequests()
-                .antMatchers("/users").hasAnyRole("ADMIN")
                 .antMatchers("/users").permitAll()
-                .antMatchers("/users/user").permitAll()
                 .antMatchers("/users/user/{id}").permitAll()
+                .antMatchers("/users/user").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and().httpBasic();

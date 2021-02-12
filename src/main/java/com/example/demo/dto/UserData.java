@@ -1,6 +1,6 @@
 package com.example.demo.dto;
 
-public class UsersData {
+public class UserData {
     private Long id;
     private String firstName;
     private String lastName;

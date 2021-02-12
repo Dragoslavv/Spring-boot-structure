@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.UsersData;
+import com.example.demo.dto.UserData;
 import com.example.demo.entity.Users;
 import com.example.demo.errorMessages.ErrorMessages;
 import com.example.demo.repository.UsersRepository;
@@ -11,13 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service("userService")
-public class ImplUserService implements UserService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UsersRepository usersRepository;
 
     @Override
-    public UsersData saveUser(UsersData user){
+    public UserData saveUser(UserData user){
         Users users = populateUserEntity(user);
         return populateCustomerData(usersRepository.save(users));
     }
@@ -29,9 +29,9 @@ public class ImplUserService implements UserService {
     }
 
     @Override
-    public List< UsersData > getAllUsers() {
-        List< UsersData > users = new ArrayList<>();
-        List< Users > usersList = usersRepository.findAll();
+    public List<UserData> getAllUsers() {
+        List<UserData> users = new ArrayList<>();
+        List<Users> usersList = usersRepository.findAll();
 
         usersList.forEach(user -> {
             users.add(populateCustomerData(user));
@@ -41,27 +41,27 @@ public class ImplUserService implements UserService {
     }
 
     @Override
-    public UsersData getUserId(Long userId){
+    public UserData getUserId(Long userId){
         return populateCustomerData(usersRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException(ErrorMessages.BAD_USER)) );
     }
 
-    private UsersData populateCustomerData(final Users users){
-        UsersData usersData = new UsersData();
+    private UserData populateCustomerData(final Users users){
+        UserData userData = new UserData();
 
-        usersData.setId(users.getId());
-        usersData.setFirstName(users.getFirstName());
-        usersData.setLastName(users.getLastName());
-        usersData.setEmail(users.getEmail());
+        userData.setId(users.getId());
+        userData.setFirstName(users.getFirstName());
+        userData.setLastName(users.getLastName());
+        userData.setEmail(users.getEmail());
 
-        return usersData;
+        return userData;
     }
 
-    private Users populateUserEntity(UsersData usersData) {
+    private Users populateUserEntity(UserData userData) {
         Users users = new Users();
 
-        users.setFirstName(usersData.getFirstName());
-        users.setLastName(usersData.getLastName());
-        users.setEmail(usersData.getEmail());
+        users.setFirstName(userData.getFirstName());
+        users.setLastName(userData.getLastName());
+        users.setEmail(userData.getEmail());
 
         return users;
     }

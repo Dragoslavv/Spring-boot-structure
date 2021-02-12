@@ -15,11 +15,6 @@ public final class Validator {
     // Logger
     private static final Logger log = Logger.getLogger(Validator.class);
 
-    // Private constructor to prevent instantiation
-    private Validator() {
-        throw new UnsupportedOperationException();
-    }
-
     @Bean
     public static boolean isThreeLetters(String param){
         log.info(param);

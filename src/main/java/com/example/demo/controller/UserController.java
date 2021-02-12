@@ -1,29 +1,36 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.UsersData;
+import com.example.demo.dto.UserData;
 import com.example.demo.service.UserService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
-    @Resource(name = "userService")
+    @Autowired
     private UserService userService;
 
     @GetMapping
-    public List< UsersData > getUsers(){
+    public List<UserData> getUsers(){
         return userService.getAllUsers();
     }
 
     @GetMapping("/user/{id}")
-    public UsersData getUser(@PathVariable Long id){
+    public UserData getUser(@PathVariable Long id){
         return userService.getUserId(id);
+    }
+
+    @PostMapping("/user")
+    public UserData saveUser(final @RequestBody UserData userData) {
+        return userService.saveUser(userData);
+    }
+
+    @DeleteMapping("/user/{id}")
+    public boolean deleteUser(@PathVariable Long id) {
+        return  userService.deleteUsers(id);
     }
 }
